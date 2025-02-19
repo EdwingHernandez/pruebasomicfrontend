@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/style.css">    
+    <title>Facturación</title>
+</head>
+<body>
+    <header>
+        <h3>Transacción Factura</h3>
+    </header>
+    <main>
+        <section>
+            <form>
+                <label>Número Factura:</label>
+                <input type="text" name="numero_factura" required>
+        
+                <label>Fecha:</label>
+                <input type="date" name="fecha" required>
+        
+                <label>Fecha Vencimiento:</label>
+                <input type="date" name="fecha_vencimiento" required>
+        
+                <label>NIT del Cliente:</label>
+                <input type="text" name="nit_cliente" required>
+        
+                <label>Nombre:</label>
+                <input type="text" name="nombre_cliente" required>
+        
+                <label>Cupo:</label>
+                <input type="number" name="cupo" step="0.01" required>
+        
+                <label>Plazo:</label>
+                <input type="number" name="plazo" required>
+        
+                <label>Cartera:</label>
+                <input type="number" name="cartera" step="0.01" required>
+        
+                <label>Disponible:</label>
+                <input type="number" name="disponible" step="0.01" required>
+        
+                <label>Código Artículo:</label>
+                <input type="text" name="codigo_articulo" required>
+        
+                <label>Nombre:</label>
+                <input type="text" name="nombre_articulo" required>
+        
+                <label>Laboratorio:</label>
+                <input type="text" name="laboratorio" required>
+        
+                <label>Naturaleza (+ ó -):</label>
+                <select name="naturaleza" required>
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+        
+                <label>Saldo:</label>
+                <input type="number" name="saldo" step="0.01" required>
+        
+                <label>Unidades:</label>
+                <input type="number" name="unidades" required>
+        
+                <label>Costos:</label>
+                <input type="number" name="costos" step="0.01" required>
+        
+                <label>Precio Venta:</label>
+                <input type="number" name="precio_venta" step="0.01" required>
+        
+                <label>Total Venta:</label>
+                <input type="number" name="total_venta" step="0.01" required>
+        
+                <label>Total Costo:</label>
+                <input type="number" name="total_costo" step="0.01" required>
+        
+                <br><br>
+        
+                <button type="submit">Agregar</button>
+            </form>
+        </section>
+        <section>
+            <div></div>
+        </section>
+    </main>
+</body>
+</html>
