@@ -64,7 +64,7 @@ section.cabeceraFactura{
     height: auto;
 }
 
-.datosFactura .camposFactura{
+.datosFactura .zonaFactura{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -73,45 +73,52 @@ section.cabeceraFactura{
     padding-bottom: 15px;
 }
 
-.datosFactura .camposFactura .campoForm{
+.datosFactura .zonaFactura .campoForm{
     display: flex;
     flex-direction: column;
 }
 
-.datosFactura .camposFactura .campoForm input, .datosFactura .camposFactura .campoForm select{
+.datosFactura .zonaFactura .campoForm input, .datosFactura .zonaFactura .campoForm select{
     padding: 5px;
     border-radius: 5px;
     border: 1px solid var(--e-global-color-2d6a869);
 }
 
 .datosFactura .campoAgregar{
-    align-self: end;
-    justify-self: end;
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .datosFactura .campoAgregar button{
     padding: 5px;
-    width: 150px;
+    width: 110px;
     border-radius: 5px;
-    border: 1px solid var(--e-global-color-secondary);
-    background-color: var(--e-global-color-secondary);
+    border: 1px solid var(--e-global-color-primary);
+    background-color: var(--e-global-color-primary);
     color: var(--e-global-color-6b0ce64);
+    font-size: .8rem;
     
 }
 
 .datosFactura .campoAgregar button:hover{
     cursor: pointer;
-    border: 1px solid var(--e-global-color-primary);
-    background-color: var(--e-global-color-primary);
-    box-shadow: 2px 2px 5px var(--e-global-color-primary);
+    border: 1px solid var(--e-global-color-secondary);
+    background-color: var(--e-global-color-secondary);
+    box-shadow: 2px 2px 5px var(--e-global-color-secondary);
     
 }
+
+
 
 section.grillaKardex{
     display: flex;
     width: 100%;
     padding: 10px;
     justify-content: center;
+    overflow: auto;
 }
 
 .kardex-table{
@@ -120,6 +127,10 @@ section.grillaKardex{
     background-color: var(--e-global-color-fdf12ae);
     border-radius: 8px;
     text-align: center;
+}
+
+.kardex-table th{
+    min-width: 100px;
 }
 
 i{

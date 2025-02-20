@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script defer type="module" src="js/main.js"></script>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <title>Facturación</title>
 </head>
 
@@ -18,15 +17,15 @@
     <main>
         <section class="cabeceraFactura">
             <form class="datosFactura" id="formFactura">
-                <div class="camposFactura">
+                <div class="zonaFactura" id="camposFactura">
                     <div class="campoForm">
                         <label>Número Factura:</label>
-                        <input type="text" name="numero_factura" required>
+                        <input type="text" name="numero_factura" required disabled>
                     </div>
 
                     <div class="campoForm">
                         <label>Fecha:</label>
-                        <input type="date" name="fecha" required>
+                        <input type="date" name="fecha" required id="fecha">
                     </div>
 
                     <div class="campoForm">
@@ -34,20 +33,22 @@
                         <input type="date" name="fecha_vencimiento" required>
                     </div>
                 </div>
-                <div class="camposFactura">
+                <div class="zonaFactura" id="camposCliente">
                     <div class="campoForm">
                         <label>NIT del Cliente:</label>
-                        <input type="text" name="nit_cliente" required>
+                        <input type="text" list="sugerenciasCliente" name="nit_cliente" id="buscarNit" required>
+                        <datalist id="sugerenciasCliente"></datalist>  
                     </div>
 
                     <div class="campoForm">
                         <label>Nombre:</label>
-                        <input type="text" name="nombre_cliente" required>
+                        <input type="text" id="buscarNomCliente" name="nombre_cliente" required>
+                        
                     </div>
 
                     <div class="campoForm">
                         <label>Cupo:</label>
-                        <input type="number" name="cupo" step="0.01" required>
+                        <input type="number" name="cupo" step="1" required>
                     </div>
 
                     <div class="campoForm">
@@ -57,18 +58,19 @@
 
                     <div class="campoForm">
                         <label>Cartera:</label>
-                        <input type="number" name="cartera" step="0.01" required>
+                        <input type="number" name="cartera" step="1" required>
                     </div>
 
                     <div class="campoForm">
                         <label>Disponible:</label>
-                        <input type="number" name="disponible" step="0.01" required>
+                        <input type="number" name="disponible" step="1" required>
                     </div>
                 </div>
-                <div class="camposFactura">
+                <div class="zonaFactura" id="camposArticulo">
                     <div class="campoForm">
                         <label>Código Artículo:</label>
-                        <input type="text" name="codigo_articulo" required>
+                        <input type="text" list="sugerenciasArt" id="buscarArtCod" name="codigo_articulo" required>
+                        <datalist id="sugerenciasArt"></datalist> 
                     </div>
 
                     <div class="campoForm">
@@ -91,7 +93,7 @@
 
                     <div class="campoForm">
                         <label>Saldo:</label>
-                        <input type="number" name="saldo" step="0.01" required>
+                        <input type="number" name="saldo" step="1" required>
                     </div>
 
                     <div class="campoForm">
@@ -101,24 +103,29 @@
 
                     <div class="campoForm">
                         <label>Costos:</label>
-                        <input type="number" name="costos" step="0.01" required>
+                        <input type="number" name="costos" step="1" required>
                     </div>
 
                     <div class="campoForm">
                         <label>Precio Venta:</label>
-                        <input type="number" name="precio_venta" step="0.01" required>
+                        <input type="number" name="precio_venta" step="1" required>
                     </div>
 
                     <div class="campoForm">
-                        <label>Total:</label>
-                        <input type="number" name="total" step="0.01" required>
+                        <label>Total Costo:</label>
+                        <input type="number" name="total-costo" step="1" required>
+                    </div>
+                    <div class="campoForm">
+                        <label>Total Venta:</label>
+                        <input type="number" name="total-venta" step="1" required>
                     </div>
                 </div>
                 <div class="campoAgregar">
-                    <button type="submit" id="botonAgregar">Agregar</button>
+                    <button type="submit" id="botonAgregar">Agregar artículo</button>
+                    <button  id="botonGuardar">Guardar factura</button>
                 </div>
+            
             </form>
-
         </section>
         <section class="grillaKardex">
             <table class="kardex-table">
