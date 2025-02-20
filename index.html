@@ -1,87 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="css/style.css">    
+    <link rel="stylesheet" href="css/style.css">
+    <script defer type="module" src="js/main.js"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <title>Facturación</title>
 </head>
+
 <body>
     <header>
-        <h3>Transacción Factura</h3>
+        <h1>Transacción Factura</h1>
     </header>
     <main>
-        <section>
-            <form>
-                <label>Número Factura:</label>
-                <input type="text" name="numero_factura" required>
-        
-                <label>Fecha:</label>
-                <input type="date" name="fecha" required>
-        
-                <label>Fecha Vencimiento:</label>
-                <input type="date" name="fecha_vencimiento" required>
-        
-                <label>NIT del Cliente:</label>
-                <input type="text" name="nit_cliente" required>
-        
-                <label>Nombre:</label>
-                <input type="text" name="nombre_cliente" required>
-        
-                <label>Cupo:</label>
-                <input type="number" name="cupo" step="0.01" required>
-        
-                <label>Plazo:</label>
-                <input type="number" name="plazo" required>
-        
-                <label>Cartera:</label>
-                <input type="number" name="cartera" step="0.01" required>
-        
-                <label>Disponible:</label>
-                <input type="number" name="disponible" step="0.01" required>
-        
-                <label>Código Artículo:</label>
-                <input type="text" name="codigo_articulo" required>
-        
-                <label>Nombre:</label>
-                <input type="text" name="nombre_articulo" required>
-        
-                <label>Laboratorio:</label>
-                <input type="text" name="laboratorio" required>
-        
-                <label>Naturaleza (+ ó -):</label>
-                <select name="naturaleza" required>
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                </select>
-        
-                <label>Saldo:</label>
-                <input type="number" name="saldo" step="0.01" required>
-        
-                <label>Unidades:</label>
-                <input type="number" name="unidades" required>
-        
-                <label>Costos:</label>
-                <input type="number" name="costos" step="0.01" required>
-        
-                <label>Precio Venta:</label>
-                <input type="number" name="precio_venta" step="0.01" required>
-        
-                <label>Total Venta:</label>
-                <input type="number" name="total_venta" step="0.01" required>
-        
-                <label>Total Costo:</label>
-                <input type="number" name="total_costo" step="0.01" required>
-        
-                <br><br>
-        
-                <button type="submit">Agregar</button>
+        <section class="cabeceraFactura">
+            <form class="datosFactura" id="formFactura">
+                <div class="camposFactura">
+                    <div class="campoForm">
+                        <label>Número Factura:</label>
+                        <input type="text" name="numero_factura" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Fecha:</label>
+                        <input type="date" name="fecha" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Fecha Vencimiento:</label>
+                        <input type="date" name="fecha_vencimiento" required>
+                    </div>
+                </div>
+                <div class="camposFactura">
+                    <div class="campoForm">
+                        <label>NIT del Cliente:</label>
+                        <input type="text" name="nit_cliente" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre_cliente" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Cupo:</label>
+                        <input type="number" name="cupo" step="0.01" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Plazo:</label>
+                        <input type="number" name="plazo" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Cartera:</label>
+                        <input type="number" name="cartera" step="0.01" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Disponible:</label>
+                        <input type="number" name="disponible" step="0.01" required>
+                    </div>
+                </div>
+                <div class="camposFactura">
+                    <div class="campoForm">
+                        <label>Código Artículo:</label>
+                        <input type="text" name="codigo_articulo" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre_articulo" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Laboratorio:</label>
+                        <input type="text" name="laboratorio" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Naturaleza (+ ó -):</label>
+                        <select name="naturaleza" required>
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                        </select>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Saldo:</label>
+                        <input type="number" name="saldo" step="0.01" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Unidades:</label>
+                        <input type="number" name="unidades" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Costos:</label>
+                        <input type="number" name="costos" step="0.01" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Precio Venta:</label>
+                        <input type="number" name="precio_venta" step="0.01" required>
+                    </div>
+
+                    <div class="campoForm">
+                        <label>Total:</label>
+                        <input type="number" name="total" step="0.01" required>
+                    </div>
+                </div>
+                <div class="campoAgregar">
+                    <button type="submit" id="botonAgregar">Agregar</button>
+                </div>
             </form>
+
         </section>
-        <section>
-            <div></div>
+        <section class="grillaKardex">
+            <table class="kardex-table">
+                <thead id="kardex-head">
+                    <th>Eliminar</th>
+                    <th>Código Transacción</th>
+                    <th>Naturaleza</th>
+                    <th>Número de Factura</th>
+                    <th>Códgo del Artículo</th>
+                    <th>Nombre Artículo</th>
+                    <th>Cantidad</th>
+                    <th>Vr. Unitario</th>
+                    <th>Subtotal</th>
+                </thead>
+                <tbody id="kardex-body">
+                </tbody>
+            </table>
         </section>
     </main>
 </body>
+
 </html>
