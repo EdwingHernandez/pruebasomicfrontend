@@ -85,39 +85,39 @@
 
                     <div class="campoForm">
                         <label>Naturaleza (+ ó -):</label>
-                        <select name="naturaleza" required>
-                            <option value="+">+</option>
+                        <select name="naturaleza" id="selectNaturaleza" required>
                             <option value="-">-</option>
+                            <option value="+">+</option>
                         </select>
                     </div>
 
                     <div class="campoForm">
                         <label>Saldo:</label>
-                        <input type="number" name="saldo" step="1" required>
+                        <input type="number" id="saldo" name="saldo" step="1" required>
                     </div>
 
                     <div class="campoForm">
                         <label>Unidades:</label>
-                        <input type="number" name="unidades" required>
+                        <input type="number" id="unidades" name="unidades" required value="0">
                     </div>
 
                     <div class="campoForm">
                         <label>Costos:</label>
-                        <input type="number" name="costos" step="1" required>
+                        <input type="number" id="costos" name="costos" step="1" required>
                     </div>
 
-                    <div class="campoForm">
+                    <div class="campoForm" id="div-precio_venta">
                         <label>Precio Venta:</label>
-                        <input type="number" name="precio_venta" step="1" required>
+                        <input type="number" id="precio_venta" name="precio_venta" step="1" required>
                     </div>
 
                     <div class="campoForm">
                         <label>Total Costo:</label>
-                        <input type="number" name="total-costo" step="1" required>
+                        <input type="number" id="total-costo" name="total-costo" step="1" required>
                     </div>
-                    <div class="campoForm">
+                    <div class="campoForm" id="div-total-venta">
                         <label>Total Venta:</label>
-                        <input type="number" name="total-venta" step="1" required>
+                        <input type="number" id="total-venta" name="total-venta" step="1" required>
                     </div>
                 </div>
                 <div class="campoAgregar">

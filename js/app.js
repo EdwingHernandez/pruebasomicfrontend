@@ -109,26 +109,45 @@ export async function autocompletarInputs(divPadre, inputext, endPoint, endPoint
                 }
             }
             else if(endPoint === "articulo"){
-                const select = divPadre.querySelector('select option');
+                
 
                 inputs[1].value = datosObtenidosById.artNombre;
                 inputs[3].value = datosObtenidosById.artSaldo;
                 inputs[5].value = datosObtenidosById.artCosto;
-                inputs[6].value = select.value = "+" ? "" : datosObtenidosById.artPrecioV;                
+                inputs[6].value = datosObtenidosById.artPrecioV;                
                 inputs[7].value = datosObtenidosById.artCosto*inputs[4].value;                
-                inputs[8].value = select.value = "+" ? "" : datosObtenidosById.artPrecioV*inputs[4].value;                
+                inputs[8].value = datosObtenidosById.artPrecioV*inputs[4].value;                
                 
                 
                 let datoForeign = await getDataId(datosObtenidosById.laboratorio, endPointForeign);
-                console.log(datoForeign)
+                // console.log(datoForeign)
                 if (datoForeign) {
-                    inputs[2] = datoForeign.labNombre;
+                    inputs[2].value = datoForeign.labNombre;
                 }
                 
             }
         }
     }    
-} 
+}
+
+// //Función para llenar campos precioVenta - totalVenta dependiendo la naturaleza
+// export async function autoCompletarNatu(divPadre, event, endPoint) {
+//     let natuSeleccionada = event.target.value;
+//     const inputs = divPadre.querySelectorAll('input');
+//     let artCod = inputs[0].value;
+//     if(artCod !== ""){
+//         const datosObtenidosById = await getDataId(artCod, endPoint); 
+//         if(natuSeleccionada === "+"){
+//             inputs[6].style.display = "none";
+//             inputs[8].style.display = "none";
+//         }
+//         else if(natuSeleccionada === "-"){
+//             inputs[6].style.display = "block";
+//             inputs[8].style.display = "block";
+//         }
+
+//     }
+// }
 
 
 //Función para eliminar un registro en el servidor

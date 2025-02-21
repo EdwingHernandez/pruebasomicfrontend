@@ -117,8 +117,9 @@ section.grillaKardex{
     display: flex;
     width: 100%;
     padding: 10px;
-    justify-content: center;
+    /* justify-content: center; */
     overflow: auto;
+    
 }
 
 .kardex-table{
@@ -127,6 +128,7 @@ section.grillaKardex{
     background-color: var(--e-global-color-fdf12ae);
     border-radius: 8px;
     text-align: center;
+    /* overflow: auto; */
 }
 
 .kardex-table th{

@@ -14,6 +14,17 @@ const sugerenciasArt = document.querySelector("#sugerenciasArt");
 const divFactura = document.querySelector("#camposFactura");
 const divCliente = document.querySelector("#camposCliente");
 const divArticulo = document.querySelector("#camposArticulo");
+const selectNatu = document.querySelector("#selectNaturaleza");
+const inputUnd = document.querySelector("#unidades");
+const divPV = document.querySelector("#div-precio_venta");
+const divTotalV = document.querySelector("#div-total-venta");
+const inputCosto = document.querySelector("#costos");
+const totalCosto = document.querySelector("#total-costo");
+const inputPrecioV = document.querySelector("#precio_venta");
+const totalVenta = document.querySelector("#total-venta");
+const inputSaldo = document.querySelector("#saldo");
+
+
 
 
 
@@ -71,7 +82,37 @@ inputArtCod.addEventListener('input', (event)=>{
 
 //Evento para autorrellenar los campos del articulo a partir del id ingresado
 inputArtCod.addEventListener('change', (event)=>{
+    event.preventDefault();
     autocompletarInputs(divArticulo, event, "articulo", "laboratorio");
+});
+
+//Evento para llenar campos precioVenta - totalVenta dependiendo la naturaleza
+selectNatu.addEventListener("change", (event)=>{
+
+    if(selectNatu.value === "+"){
+        divPV.style.display = "none";
+        divTotalV.style.display = "none";
+    }
+    else if(selectNatu.value === "-"){
+        divPV.style.display = "flex";
+        divTotalV.style.display = "flex";
+    }
+});
+
+
+//Evento para llenar campos totalCosto - totalVenta dependiendo de las unidades
+inputUnd.addEventListener("input", ()=>{
+    totalCosto.value = inputCosto.value*inputUnd.value;
+    totalVenta.value = inputPrecioV.value*inputUnd.value;
+    if(selectNatu.value === "-"){
+        let saldoDisponible = parseFloat(inputSaldo.value) || 0;
+        let unidadesIngresadas = parseFloat(inputUnd.value) || 0;
+
+        if (unidadesIngresadas > saldoDisponible) {
+            alert("No puedes ingresar más unidades de las disponibles en saldo");
+            inputUnd.value = saldoDisponible;
+        }
+    }
 });
 
 
@@ -86,13 +127,16 @@ function agregarArticulo(formData) {
     let artNombre = formData.get("nombre_articulo");
     let artUnd = formData.get("unidades");
     let artVrUnit = "";
+    let subtotal = "";
     if(kardexNatu === "+"){
         artVrUnit = formData.get("costos");
+        subtotal = formData.get("total-costo");
     }
     else{
         artVrUnit = formData.get("precio_venta");
+        subtotal = formData.get("total-venta");
     }
-    let subtotal = formData.get("total");
+    
     let factuCod = formData.get("numero_factura");
 
     let tablaKardex = document.getElementById("kardex-body");
