@@ -33,8 +33,12 @@ const inputSaldo = document.querySelector("#saldo");
 //Evento recargar página
 document.addEventListener("DOMContentLoaded", function () {
     let inputFecha = document.getElementById("fecha");
-    let hoy = new Date().toISOString().split("T")[0]; // Obtiene la fecha en formato YYYY-MM-DD
+    let inputFechaVence = document.getElementById("fecha_vencimiento");
+    let hoy = new Date().toISOString().split("T")[0]; 
+    let diaVence = new Date(); 
+    diaVence.setDate(diaVence.getDate() + 30);
     inputFecha.value = hoy;
+    inputFechaVence.value = diaVence.toISOString().split("T")[0];
   });
 
 //Evento submit para agregar un nuevo artículo a la factura
