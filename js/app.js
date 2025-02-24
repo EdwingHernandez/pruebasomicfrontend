@@ -7,65 +7,68 @@ import { deleteData } from "../Apis/api.js";
 import { getCarteraId } from "../Apis/api.js";
 
 
+//---------------FUNCIONES DE ACCESO A LA API-----------------
+
 //Función para enviar datos al servidor a partir de un fromulario
-export function enviarDatos(form, endPoint){
+export function guardarFactura(form, endPoint){
     let datosForm = new FormData(form);
-    let inputsForm = Object.fromEntries(datosForm);
-    postData(inputsForm, endPoint);
+    console.log(datosForm)
+    let inputsForm = Object.fromEntries(datosForm);a
+    // postData(inputsForm, endPoint);
     console.log(inputsForm);
 }
 
-//Función para agregar opciones a un select con llaves foráneas
-export async function traerLlavesForaneas(padre, endPoint, id = null){
-    const datosForaneos = await getData(endPoint);
-    if(id === null){
-        datosForaneos.forEach(dato => {
-            const opcion = document.createElement("option");
-            opcion.value = dato.id;
-            opcion.textContent = dato.name;
-            padre.appendChild(opcion);         
-        });
-    } else{
-        datosForaneos.forEach(dato => {
-            const opcion = document.createElement("option");
-            if(dato.id === id){
-                opcion.selected = true;
-            }
-            opcion.value = dato.id;
-            opcion.textContent = dato.name;
-            padre.appendChild(opcion);         
-        });
+// //Función para agregar opciones a un select con llaves foráneas
+// export async function traerLlavesForaneas(padre, endPoint, id = null){
+//     const datosForaneos = await getData(endPoint);
+//     if(id === null){
+//         datosForaneos.forEach(dato => {
+//             const opcion = document.createElement("option");
+//             opcion.value = dato.id;
+//             opcion.textContent = dato.name;
+//             padre.appendChild(opcion);         
+//         });
+//     } else{
+//         datosForaneos.forEach(dato => {
+//             const opcion = document.createElement("option");
+//             if(dato.id === id){
+//                 opcion.selected = true;
+//             }
+//             opcion.value = dato.id;
+//             opcion.textContent = dato.name;
+//             padre.appendChild(opcion);         
+//         });
 
-    }
-}
+//     }
+// }
 
 //Función para traer y mostrar los datos del servidor
-export async function obtenerDatos(form, padre, endPoint, clase){
-    padre.innerHTML = '';
-    let datosForm = new FormData(form);
-    let inputsForm = Object.fromEntries(datosForm);
-    let textoMin = inputsForm.name.toLowerCase();    
-    const datosObtenidos = await getData(endPoint);
+// export async function obtenerDatos(form, padre, endPoint, clase){
+//     padre.innerHTML = '';
+//     let datosForm = new FormData(form);
+//     let inputsForm = Object.fromEntries(datosForm);
+//     let textoMin = inputsForm.name.toLowerCase();    
+//     const datosObtenidos = await getData(endPoint);
 
-    datosObtenidos.forEach(datoObt => {
-        if(textoMin === datoObt.name.toLowerCase()){
-            const campoId = document.createElement("h5");
-            const campoName = document.createElement("h5");
-            const boton = document.createElement("button");
+//     datosObtenidos.forEach(datoObt => {
+//         if(textoMin === datoObt.name.toLowerCase()){
+//             const campoId = document.createElement("h5");
+//             const campoName = document.createElement("h5");
+//             const boton = document.createElement("button");
             
-            campoId.textContent = datoObt.id;
-            campoName.textContent = datoObt.name;
-            boton.textContent = clase;
-            boton.className = clase;
-            boton.id = datoObt.id;
+//             campoId.textContent = datoObt.id;
+//             campoName.textContent = datoObt.name;
+//             boton.textContent = clase;
+//             boton.className = clase;
+//             boton.id = datoObt.id;
 
-            padre.appendChild(campoId);
-            padre.appendChild(campoName);
-            padre.appendChild(boton);
+//             padre.appendChild(campoId);
+//             padre.appendChild(campoName);
+//             padre.appendChild(boton);
             
-        }
-    });
-}
+//         }
+//     });
+// }
 
 //Función para autocompletar un campo del form 
 export async function autocompletar(dataListPadre, inputext, endPoint){
@@ -130,68 +133,72 @@ export async function autocompletarInputs(divPadre, inputext, endPoint, endPoint
     }    
 }
 
-// //Función para llenar campos precioVenta - totalVenta dependiendo la naturaleza
-// export async function autoCompletarNatu(divPadre, event, endPoint) {
-//     let natuSeleccionada = event.target.value;
-//     const inputs = divPadre.querySelectorAll('input');
-//     let artCod = inputs[0].value;
-//     if(artCod !== ""){
-//         const datosObtenidosById = await getDataId(artCod, endPoint); 
-//         if(natuSeleccionada === "+"){
-//             inputs[6].style.display = "none";
-//             inputs[8].style.display = "none";
-//         }
-//         else if(natuSeleccionada === "-"){
-//             inputs[6].style.display = "block";
-//             inputs[8].style.display = "block";
-//         }
-
-//     }
-// }
-
-
-//Función para eliminar un registro en el servidor
-export function eliminarRegistro(id, endPoint){
-
-    if(confirm("¿Seguro que desea eliminar este registro?") === true){
-        deleteData(id, endPoint);
+//Función para prellenar el número de factura
+export async function consecutivoEntidad(endPoint) {
+    let dataEntidad = await getData(endPoint);  
+    // console.log(dataEntidad) 
+    if(endPoint === "factura"){
+        const inputFactuCod = document.querySelector("#numero_factura");
+        inputFactuCod.value =  dataEntidad.at(-1).factuCod + 1;
+    }
+    else if(endPoint === "kardex"){
+        let tablaKardex = document.getElementById("kardex-body");
+        let filasKardex = tablaKardex.querySelectorAll("tr");
+        
+        if(!filasKardex.length == 0){
+            let tdsUltimaFila = filasKardex[filasKardex.length- 1].querySelectorAll("td");
+            let codigoTra = parseInt(tdsUltimaFila[1].innerText);
+            return codigoTra + 1; 
+        }
+        return dataEntidad.at(-1).kardexCod + 1;
     }
 }
 
+
+//Función para eliminar un registro en el servidor
+// export function eliminarRegistro(id, endPoint){
+
+//     if(confirm("¿Seguro que desea eliminar este registro?") === true){
+//         deleteData(id, endPoint);
+//     }
+// }
+
 //Función para actualizar un registro en el servidor
-export function editarRegistro(form, endPoint){
-    let datosForm = new FormData(form);
-    let inputsForm = Object.fromEntries(datosForm);
-    let registroId = form.id.value;
-    putData(inputsForm, endPoint, registroId);
-}
+// export function editarRegistro(form, endPoint){
+//     let datosForm = new FormData(form);
+//     let inputsForm = Object.fromEntries(datosForm);
+//     let registroId = form.id.value;
+//     putData(inputsForm, endPoint, registroId);
+// }
 
 //Función para prellenar el formulario
-export async function prellenarForm(endPoint, id){
-    const registro = await getDataId(id, endPoint);
-    const campoId = document.querySelector("#campoId");
-    const campoName = document.querySelector("#campoName");
+// export async function prellenarForm(endPoint, id){
+//     const registro = await getDataId(id, endPoint);
+//     const campoId = document.querySelector("#campoId");
+//     const campoName = document.querySelector("#campoName");
     
-    campoId.value = registro.id;
-    campoName.value = registro.name;
-}
+//     campoId.value = registro.id;
+//     campoName.value = registro.name;
+// }
 
 //Función 2 para prellenar el formulario
-export async function prellenarFormAct(endPoint, id){
-    const registro = await getDataId(id, endPoint);
-    const campoId = document.querySelector("#campoId");
-    const campoName = document.querySelector("#campoName");
-    const campoCodTransaccion = document.querySelector("#cCodTransaccion");
-    const campoNroFromulario = document.querySelector("#cNroFromulario");
-    const campoValor = document.querySelector("#cValor");
-    const campoSerial = document.querySelector("#cSerial");
-    const campoRespId = document.querySelector("#cResponsableId");
+// export async function prellenarFormAct(endPoint, id){
+//     const registro = await getDataId(id, endPoint);
+//     const campoId = document.querySelector("#campoId");
+//     const campoName = document.querySelector("#campoName");
+//     const campoCodTransaccion = document.querySelector("#cCodTransaccion");
+//     const campoNroFromulario = document.querySelector("#cNroFromulario");
+//     const campoValor = document.querySelector("#cValor");
+//     const campoSerial = document.querySelector("#cSerial");
+//     const campoRespId = document.querySelector("#cResponsableId");
     
-    campoId.value = registro.id;
-    campoName.value = registro.name;
-    campoCodTransaccion.value = registro.codTransaccion;
-    campoNroFromulario.value = registro.nroFromulario;
-    campoValor.value = registro.valor;
-    campoSerial.value = registro.serial;
-    campoRespId.value = registro.responsableId;
-}
+//     campoId.value = registro.id;
+//     campoName.value = registro.name;
+//     campoCodTransaccion.value = registro.codTransaccion;
+//     campoNroFromulario.value = registro.nroFromulario;
+//     campoValor.value = registro.valor;
+//     campoSerial.value = registro.serial;
+//     campoRespId.value = registro.responsableId;
+// }
+
+//Función para realizar guardar los datos en la base de datos

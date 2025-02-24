@@ -1,5 +1,5 @@
 //-----------------MÓDULOS IMPORTADOS-------------------------
-import { autocompletar,  autocompletarInputs} from './app.js';
+import { autocompletar,  autocompletarInputs, consecutivoEntidad, guardarFactura} from './app.js';
 
 
 
@@ -7,11 +7,14 @@ import { autocompletar,  autocompletarInputs} from './app.js';
 
 //Obtener el formulario
 const enviarForm = document.querySelector("#formFactura");
+// const inputFactuCod = document.querySelector("#numero_factura");
+const inputFecha = document.getElementById("fecha");
+const inputFechaVence = document.getElementById("fecha_vencimiento");
 const inputNit = document.querySelector("#buscarNit");
 const sugerenciasNit = document.querySelector("#sugerenciasCliente");
 const inputArtCod = document.querySelector("#buscarArtCod");
 const sugerenciasArt = document.querySelector("#sugerenciasArt");
-const divFactura = document.querySelector("#camposFactura");
+// const divFactura = document.querySelector("#camposFactura");
 const divCliente = document.querySelector("#camposCliente");
 const divArticulo = document.querySelector("#camposArticulo");
 const selectNatu = document.querySelector("#selectNaturaleza");
@@ -23,6 +26,8 @@ const totalCosto = document.querySelector("#total-costo");
 const inputPrecioV = document.querySelector("#precio_venta");
 const totalVenta = document.querySelector("#total-venta");
 const inputSaldo = document.querySelector("#saldo");
+const pieTabla = document.querySelector("#pie-tabla");
+const botonGuardar = document.querySelector("#botonGuardar");
 
 
 
@@ -32,13 +37,13 @@ const inputSaldo = document.querySelector("#saldo");
 
 //Evento recargar página
 document.addEventListener("DOMContentLoaded", function () {
-    let inputFecha = document.getElementById("fecha");
-    let inputFechaVence = document.getElementById("fecha_vencimiento");
     let hoy = new Date().toISOString().split("T")[0]; 
     let diaVence = new Date(); 
     diaVence.setDate(diaVence.getDate() + 30);
     inputFecha.value = hoy;
     inputFechaVence.value = diaVence.toISOString().split("T")[0];
+    consecutivoEntidad("factura");
+    pieTabla.style.display = "none";
   });
 
 //Evento submit para agregar un nuevo artículo a la factura
@@ -52,9 +57,10 @@ enviarForm.addEventListener("submit", (submit) => {
     let camposArticulo = document.querySelectorAll("#camposArticulo .campoForm input");
 
 
-    camposFactura.forEach(campoFactu => campoFactu.disabled = true);
-    camposCliente.forEach(campoCliente => campoCliente.disabled = true);
+    camposFactura.forEach(campoFactu => campoFactu.readonly = true);
+    camposCliente.forEach(campoCliente => campoCliente.readonly = true);
     camposArticulo.forEach(campoArt => campoArt.value = "");
+    pieTabla.style.display = "table-row-group";
 
 });
 
@@ -119,13 +125,20 @@ inputUnd.addEventListener("input", ()=>{
     }
 });
 
+//Evento para guardar la factura al dar click al botón
+botonGuardar.addEventListener("click", ()=>{
+
+    
+
+    guardarFactura(event);
+})
 
 //---------------FUNCIONES PARA DAR ESTILO AL HTML Y CSS------------------------
 
 //Función para agregar un nuevo artículo al kardex
-function agregarArticulo(formData) {
+async function agregarArticulo(formData) {
 
-    let kardexCod = 1;
+    let kardexCod = await consecutivoEntidad("kardex");
     let kardexNatu = formData.get("naturaleza");
     let artCod = formData.get("codigo_articulo");
     let artNombre = formData.get("nombre_articulo");
@@ -161,8 +174,8 @@ function agregarArticulo(formData) {
 
     `
     tablaKardex.appendChild(filaArticulo);
-
+    
 }
 
-//---------------FUNCIONES DE ACCESO A LA API-----------------
+
 

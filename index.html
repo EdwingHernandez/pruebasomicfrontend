@@ -13,7 +13,21 @@
 
 <body>
     <header>
+        <div></div>
         <h1>Transacción Factura</h1>
+        <div class="boton_menu">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="menu">
+                <a href="#">Crear</a>
+                <a href="#">Editar</a>
+                <a href="#">Eliminar</a>
+            </nav>   
+        </div>
     </header>
     <main>
         <section class="cabeceraFactura">
@@ -21,7 +35,7 @@
                 <div class="zonaFactura" id="camposFactura">
                     <div class="campoForm">
                         <label>Número Factura:</label>
-                        <input type="text" name="numero_factura" required disabled>
+                        <input type="text" id="numero_factura" name="numero_factura" required readonly>
                     </div>
 
                     <div class="campoForm">
@@ -123,7 +137,7 @@
                 </div>
                 <div class="campoAgregar">
                     <button type="submit" id="botonAgregar">Agregar artículo</button>
-                    <button  id="botonGuardar">Guardar factura</button>
+                    <button type="button" id="botonGuardar">Guardar factura</button>
                 </div>
             
             </form>
@@ -143,6 +157,19 @@
                 </thead>
                 <tbody id="kardex-body">
                 </tbody>
+                <tfoot id="pie-tabla">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total factura</td>
+                        <td>$10.000</td>
+                    </tr>
+                </tfoot>
             </table>
         </section>
     </main>

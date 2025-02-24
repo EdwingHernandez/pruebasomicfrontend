@@ -1,35 +1,46 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
 @import url(variables.css);
 
-*{
+* {
     font-size: 15px;
     box-sizing: border-box;
 }
 
 /* -----Ajustes generales ------- */
 body {
-  font-family: 'Montserrat', sans-serif;
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-p, a, span, li, ul, i, div{
-    margin:0;
-    padding:0;
+p,
+a,
+span,
+li,
+ul,
+i,
+div {
+    margin: 0;
+    padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     padding: 0;
     font-family: 'Playfair Display', serif;
 }
 
-header{
+header {
+    display: flex;
     background-color: var(--e-global-color-secondary);
     color: var(--e-global-color-2d6a869);
     text-align: center;
@@ -37,13 +48,16 @@ header{
     font-weight: bold;
     border-bottom: 4px solid var(--e-global-color-primary);
     box-shadow: 1px 1px 3px var(--e-global-color-primary);
+    align-items: center;
+    justify-content: space-between;
+    
 }
 
-header h1{
+header h1 {
     font-size: 1.4rem;
 }
 
-main{
+main {
     width: 100%;
     display: grid;
     align-self: center;
@@ -51,20 +65,20 @@ main{
 
 }
 
-section.cabeceraFactura{
+section.cabeceraFactura {
     width: 100%;
     padding: 10px;
-        
+
 }
 
-.datosFactura{
+.datosFactura {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
 }
 
-.datosFactura .zonaFactura{
+.datosFactura .zonaFactura {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -73,18 +87,19 @@ section.cabeceraFactura{
     padding-bottom: 15px;
 }
 
-.datosFactura .zonaFactura .campoForm{
+.datosFactura .zonaFactura .campoForm {
     display: flex;
     flex-direction: column;
 }
 
-.datosFactura .zonaFactura .campoForm input, .datosFactura .zonaFactura .campoForm select{
+.datosFactura .zonaFactura .campoForm input,
+.datosFactura .zonaFactura .campoForm select {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid var(--e-global-color-2d6a869);
 }
 
-.datosFactura .campoAgregar{
+.datosFactura .campoAgregar {
     display: flex;
     width: 100%;
     justify-content: end;
@@ -92,7 +107,7 @@ section.cabeceraFactura{
     margin-top: 10px;
 }
 
-.datosFactura .campoAgregar button{
+.datosFactura .campoAgregar button {
     padding: 5px;
     width: 110px;
     border-radius: 5px;
@@ -100,29 +115,29 @@ section.cabeceraFactura{
     background-color: var(--e-global-color-primary);
     color: var(--e-global-color-6b0ce64);
     font-size: .8rem;
-    
+
 }
 
-.datosFactura .campoAgregar button:hover{
+.datosFactura .campoAgregar button:hover {
     cursor: pointer;
     border: 1px solid var(--e-global-color-secondary);
     background-color: var(--e-global-color-secondary);
     box-shadow: 2px 2px 5px var(--e-global-color-secondary);
-    
+
 }
 
 
 
-section.grillaKardex{
+section.grillaKardex {
     display: flex;
     width: 100%;
     padding: 10px;
     /* justify-content: center; */
     overflow: auto;
-    
+
 }
 
-.kardex-table{
+.kardex-table {
     width: 100%;
     border-collapse: collapse;
     background-color: var(--e-global-color-fdf12ae);
@@ -131,14 +146,94 @@ section.grillaKardex{
     /* overflow: auto; */
 }
 
-.kardex-table th{
+.kardex-table th {
     min-width: 100px;
 }
 
-i{
+i {
     color: var(--e-global-color-feb1dd0);
 }
 
-i:hover{
+i:hover {
     cursor: pointer;
+}
+
+#pie-tabla {
+    font-weight: bold;
+}
+
+.menu {
+    position: fixed;
+    top: 30vh;
+    left: -250px;
+    width: 180px;
+    height: 40vh;
+    background-color: var(--e-global-color-menu);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background-color: var(--e-global-color-50b2a21);
+}
+
+/* Mostrar menú cuando el checkbox está activado */
+#menu-toggle:checked~.menu {
+    left: 5px;
+}
+
+
+/* Animaciones del icono */
+#menu-toggle:checked+.menu-icon span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+#menu-toggle:checked+.menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked+.menu-icon span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Checkbox oculto */
+#menu-toggle {
+    display: none;
+}
+
+/* Icono de hamburguesa */
+.menu-icon {
+    width: 20px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.menu-icon span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.boton_menu{
+    display: flex;
+    justify-self: end;
 }

@@ -3,7 +3,7 @@ const URL = "http://localhost:8080";
 
 //Constante para almacenar el formato en que se enviará la información
 const cabecera = new Headers({
-    "Content-Type": "application/json"
+    "Content-Type": "application/json;charset=UTF-8"
 });
 
 //Método para traer datos del servidor
