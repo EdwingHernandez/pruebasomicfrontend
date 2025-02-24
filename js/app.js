@@ -115,7 +115,7 @@ export async function autocompletarInputs(divPadre, inputext, endPoint, endPoint
                 
 
                 inputs[1].value = datosObtenidosById.artNombre;
-                inputs[3].value = datosObtenidosById.artSaldo;
+                inputs[3].value = stockJSON[datosObtenidosById.artCod] ?stockJSON[datosObtenidosById.artCod].stock : datosObtenidosById.artSaldo;
                 inputs[5].value = datosObtenidosById.artCosto;
                 inputs[6].value = datosObtenidosById.artPrecioV;                
                 inputs[7].value = datosObtenidosById.artCosto*inputs[4].value;                

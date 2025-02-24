@@ -28,6 +28,9 @@ const totalVenta = document.querySelector("#total-venta");
 const inputSaldo = document.querySelector("#saldo");
 const pieTabla = document.querySelector("#pie-tabla");
 const botonGuardar = document.querySelector("#botonGuardar");
+let totalFactura = 0;
+window.stockJSON = {};
+window.carteraJSON = {};
 
 
 
@@ -44,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
     inputFechaVence.value = diaVence.toISOString().split("T")[0];
     consecutivoEntidad("factura");
     pieTabla.style.display = "none";
+    totalFactura = 0;
+    stockJSON = {};
+    carteraJSON = {};
   });
 
 //Evento submit para agregar un nuevo artículo a la factura
@@ -143,24 +149,53 @@ async function agregarArticulo(formData) {
     let artCod = formData.get("codigo_articulo");
     let artNombre = formData.get("nombre_articulo");
     let artUnd = formData.get("unidades");
+    let nitCliente = formData.get("nit_cliente");
+    let carteraCliente = formData.get("cartera");
+
     let artVrUnit = "";
     let subtotal = "";
     if(kardexNatu === "+"){
         artVrUnit = formData.get("costos");
         subtotal = formData.get("total-costo");
+        totalFactura+=parseInt(subtotal);
+        if(stockJSON[artCod]){
+            stockJSON[artCod].stock += parseInt(artUnd);
+        }else{
+            stockJSON.id = artCod;
+            stockJSON[artCod] = { stock: parseInt(formData.get("saldo")) + parseInt(artUnd) };
+        }
+
+        if(carteraJSON[nitCliente]){
+            carteraJSON[nitCliente].cartera -= parseInt(carteraCliente);
+        }else{
+            carteraJSON.id = nitCliente;
+            carteraJSON[nitCliente] = { cartera: parseInt(formData.get("saldo")) - parseInt(nitCliente) };
+        }        
+        
     }
     else{
         artVrUnit = formData.get("precio_venta");
         subtotal = formData.get("total-venta");
+        totalFactura-=parseInt(subtotal);
+        if(stockJSON[artCod]){
+            console.log("entraaa")
+            stockJSON[artCod].stock -= parseInt(artUnd);
+        }else{
+            stockJSON.id = artCod;
+            stockJSON[artCod] = { stock: parseInt(formData.get("saldo")) - parseInt(artUnd)};
+            console.log(stockJSON)
+        }
     }
     
     let factuCod = formData.get("numero_factura");
 
     let tablaKardex = document.getElementById("kardex-body");
 
-    
-    const filaArticulo = document.createElement("tr");
+    const campoTotalFactu = document.querySelector("#campoTotal");
+    campoTotalFactu.innerText = totalFactura;
 
+
+    const filaArticulo = document.createElement("tr");
     filaArticulo.innerHTML = `
         <td><i class='bx bxs-trash'></i></td>
         <td>${kardexCod}</td>
@@ -173,6 +208,11 @@ async function agregarArticulo(formData) {
         <td>${subtotal}</td>    
 
     `
+
+
+
+
+
     tablaKardex.appendChild(filaArticulo);
     
 }
